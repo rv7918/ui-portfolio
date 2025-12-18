@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Navbar = () => {
   return (
     <nav className="w-full bg-gray-800 sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center p-4">
@@ -9,10 +9,10 @@ const Header = () => {
         </Link>
         <ul className="flex items-center">
           <li className="mr-4">
-            <Link to="/home" className="text-white hover:underline">Home</Link>
+            <Link to="/home">Home</Link>
           </li>
           <li className="mr-4">
-            <Link to="/about" className="text-white hover:underline">About</Link>
+            <Link to="/about">About</Link>
           </li>
         </ul>
       </div>
@@ -20,4 +20,4 @@ const Header = () => {
   );
 };
 
-export default Header
+export default Navbar
