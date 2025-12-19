@@ -27,6 +27,12 @@ A modern portfolio application showcasing system architecture case studies, buil
 - **ESLint** - Code linting and quality checks
 - **TypeScript ESLint** - TypeScript-specific linting rules
 
+### Testing
+- **Vitest** - Fast unit test framework
+- **React Testing Library** - Component testing utilities
+- **@vitest/coverage-v8** - Code coverage reporting
+- **happy-dom** - Lightweight DOM implementation for testing
+
 ## Features
 
 - 📱 Responsive design with mobile-first approach
@@ -35,3 +41,4 @@ A modern portfolio application showcasing system architecture case studies, buil
 - 🔄 Client-side routing with React Router
 - ⚡ Fast development with Vite HMR
 - 📝 Rich text content rendering with line break support
+- ✅ Unit tests with 80%+ coverage
