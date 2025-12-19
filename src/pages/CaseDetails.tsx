@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { getCaseStudyBySlug } from "../api/caseStudy.graphql";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import PageHero from "../components/PageHero";
+import RichText from "../components/RichText";
 
 const CaseDetails = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -20,11 +20,7 @@ const CaseDetails = () => {
     <>
       <PageHero data={caseStudy} />
       <article className="space-y-6 container mx-auto px-4 py-8">
-        {caseStudy.body?.json && (
-          <div className="prose max-w-none text-gray-700 text-lg">
-            {documentToReactComponents(caseStudy.body.json)}
-          </div>
-        )}
+        <RichText content={caseStudy.body?.json} />
 
         {caseStudy.systemDiagram?.url && (
           <div>
