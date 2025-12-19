@@ -8,6 +8,7 @@ export const getAbout = async () => {
           title
           summary
           body
+          richBody { json }
         }
       }
     }
