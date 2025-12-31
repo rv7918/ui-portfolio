@@ -3,7 +3,7 @@ import { fetchGraphQL } from "../lib/contentfulGraphql";
 export const getHomepageData = async () => {
   const query = `
     {
-      siteIntroCollection(limit: 1) {
+      uiSiteIntroCollection(limit: 1) {
         items {
           headline
           subheadline
