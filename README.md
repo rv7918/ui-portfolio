@@ -1,4 +1,4 @@
-# Architecture Portfolio
+# UI Portfolio
 
 A modern portfolio application showcasing system architecture case studies, built with React and TypeScript.
 
