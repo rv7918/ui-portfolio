@@ -11,9 +11,9 @@ describe('HomeCard', () => {
   const mockCaseStudy = {
     sys: { id: '123' },
     title: 'Test Case Study',
-    summary: 'This is a test summary',
+    summaryLong: 'This is a test summary',
     slug: 'test-case-study',
-    thumbnail: {
+    coverImage: {
       url: 'https://example.com/image.jpg',
     },
   }
@@ -41,12 +41,12 @@ describe('HomeCard', () => {
     expect(link).toHaveAttribute('href', '/case/test-case-study')
   })
 
-  it('handles missing thumbnail gracefully', () => {
-    const caseStudyWithoutThumbnail = {
+  it('handles missing coverImage gracefully', () => {
+    const caseStudyWithoutCoverImage = {
       ...mockCaseStudy,
-      thumbnail: null,
+      coverImage: null,
     }
-    renderWithRouter(<HomeCard caseStudy={caseStudyWithoutThumbnail} />)
+    renderWithRouter(<HomeCard caseStudy={caseStudyWithoutCoverImage} />)
     const image = screen.getByAltText('Test Case Study')
     expect(image).toBeInTheDocument()
   })

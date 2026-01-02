@@ -5,7 +5,7 @@ import PageHero from '../PageHero'
 describe('PageHero', () => {
   const mockData = {
     title: 'Test Title',
-    summary: 'Test summary text',
+    summaryLong: 'Test summary text',
   }
 
   it('renders title when provided', () => {

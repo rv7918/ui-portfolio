@@ -9,13 +9,13 @@ export const getHomepageData = async () => {
           subheadline
         }
       }
-      architectureCaseStudyCollection {
+      uiCaseStudyCollection {
         items {
           sys { id }
           title
           slug
-          summary
-          thumbnail { url }
+          summaryLong
+          coverImage { url }
         }
       }
     }
