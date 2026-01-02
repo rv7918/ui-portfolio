@@ -50,7 +50,7 @@ describe('Hero', () => {
 
   it('renders headline and subheadline when data is loaded', async () => {
     const mockData = {
-      siteIntroCollection: {
+      uiSiteIntroCollection: {
         items: [
           {
             headline: 'Test Headline',
@@ -70,7 +70,7 @@ describe('Hero', () => {
 
   it('has correct section structure', async () => {
     const mockData = {
-      siteIntroCollection: {
+      uiSiteIntroCollection: {
         items: [
           {
             headline: 'Test Headline',

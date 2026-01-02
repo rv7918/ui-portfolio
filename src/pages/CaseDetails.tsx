@@ -6,6 +6,7 @@ import PageHero from "../components/PageHero";
 import RichText from "../components/RichText";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import NDA from "../components/Nda";
 
 const CaseDetails = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -22,69 +23,105 @@ const CaseDetails = () => {
   if (error) return <div className="container mx-auto px-4 py-8"><p>Error loading case study</p></div>;
   if (!caseStudy) return <div className="container mx-auto px-4 py-8"><p>Case study not found</p></div>;
 
-  // Collect all images for lightbox
-  const images = [
-    caseStudy.systemDiagram?.url && { src: caseStudy.systemDiagram.url, alt: `${caseStudy.title} - System Diagram` },
-    caseStudy.dataFlowDiagram?.url && { src: caseStudy.dataFlowDiagram.url, alt: `${caseStudy.title} - Data Flow Diagram` },
-    caseStudy.sequenceDiagram?.url && { src: caseStudy.sequenceDiagram.url, alt: `${caseStudy.title} - Sequence Diagram` },
-  ].filter(Boolean) as Array<{ src: string; alt: string }>;
+  // Collect all images from all sections for lightbox
+  const allImages: Array<{ src: string; alt: string }> = [];
+  caseStudy.sectionsCollection?.items?.forEach((section: any) => {
+    section.imagesCollection?.items?.forEach((image: any) => {
+      if (image.url) {
+        allImages.push({
+          src: image.url,
+          alt: image.title || `${caseStudy.title} - ${section.title}`,
+        });
+      }
+    });
+  });
 
   const openLightbox = (imageUrl: string) => {
-    const index = images.findIndex(img => img.src === imageUrl);
+    const index = allImages.findIndex(img => img.src === imageUrl);
     if (index !== -1) {
       setLightboxIndex(index);
       setLightboxOpen(true);
     }
   };
 
+  const getGridClass = (layout: string) => {
+    switch (layout) {
+      case "grid-2":
+        return "grid grid-cols-1 md:grid-cols-2 gap-8";
+      case "grid-3":
+        return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8";
+      case "grid-4":
+        return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8";
+      default:
+        return "grid grid-cols-1 gap-6";
+    }
+  };
+
   return (
     <>
       <PageHero data={caseStudy} />
-      <article className="space-y-6 container mx-auto px-4 py-8">
-        <RichText content={caseStudy.body?.json} />
-
-        {caseStudy.systemDiagram?.url && (
-          <div>
-            <h2 className="text-2xl font-semibold pt-3 text-gray-700 mb-4 mt-3">System Diagram</h2>
-            <img 
-              src={caseStudy.systemDiagram.url} 
-              alt={`${caseStudy.title} - System Diagram`} 
-              className="w-full h-auto block m-0 p-0 cursor-pointer hover:opacity-90 transition-opacity"
-              onClick={() => openLightbox(caseStudy.systemDiagram.url)}
-            />
-          </div>
+      <article className="space-y-8 container mx-auto px-4 py-8">
+      <NDA />
+        {caseStudy.problem && (
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-700 mb-4">Problem</h2>
+            <p className="text-gray-600 whitespace-pre-line">{caseStudy.problem}</p>
+          </section>
         )}
 
-        {caseStudy.dataFlowDiagram?.url && (
-          <div>
-            <h2 className="text-2xl font-semibold pt-4 text-gray-700 mb-4 mt-7">Data Flow Diagram</h2>
-            <img 
-              src={caseStudy.dataFlowDiagram.url} 
-              alt={`${caseStudy.title} - Data Flow Diagram`} 
-              className="w-full h-auto block m-0 p-0 cursor-pointer hover:opacity-90 transition-opacity"
-              onClick={() => openLightbox(caseStudy.dataFlowDiagram.url)}
-            />
-          </div>
+        {caseStudy.solution && (
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-700 mb-4">Solution</h2>
+            <p className="text-gray-600 whitespace-pre-line">{caseStudy.solution}</p>
+          </section>
         )}
 
-        {caseStudy.sequenceDiagram?.url && (
-          <div>
-            <h2 className="text-2xl font-semibold pt-4 text-gray-700 mb-4 mt-7">Sequence Diagram</h2>
-            <img 
-              src={caseStudy.sequenceDiagram.url} 
-              alt={`${caseStudy.title} - Sequence Diagram`} 
-              className="w-full h-auto block m-0 p-0 cursor-pointer hover:opacity-90 transition-opacity"
-              onClick={() => openLightbox(caseStudy.sequenceDiagram.url)}
-            />
-          </div>
+        {caseStudy.process?.json && (
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-700 mb-4">Process</h2>
+            <RichText content={caseStudy.process.json} />
+          </section>
         )}
+
+        {caseStudy.techStack && (
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-700 mb-4">Tech Stack</h2>
+            <p className="text-gray-600">{caseStudy.techStack}</p>
+          </section>
+        )}
+
+        {caseStudy.outcomeSummary && (
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-700 mb-4">Outcome</h2>
+            <p className="text-gray-700 whitespace-pre-line">{caseStudy.outcomeSummary}</p>
+          </section>
+        )}
+
+        {caseStudy.sectionsCollection?.items?.map((section: any) => (
+          <section key={section.sys.id} className="mt-10">
+            <h2 className="text-2xl font-semibold text-gray-700 mb-4">{section.title}</h2>
+            {section.imagesCollection?.items && section.imagesCollection.items.length > 0 && (
+              <div className={getGridClass(section.imageLayout || "grid-1")}>
+                {section.imagesCollection.items.map((image: any) => (
+                  <img
+                    key={image.sys.id}
+                    src={image.url}
+                    alt={image.title || section.title}
+                    className="w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
+                    onClick={() => openLightbox(image.url)}
+                  />
+                ))}
+              </div>
+            )}
+          </section>
+        ))}
       </article>
 
       <Lightbox
         open={lightboxOpen}
         close={() => setLightboxOpen(false)}
         index={lightboxIndex}
-        slides={images}
+        slides={allImages}
       />
     </>
   );

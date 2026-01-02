@@ -3,21 +3,17 @@ import { fetchGraphQL } from "../lib/contentfulGraphql";
 export const getCaseStudies = async () => {
   const query = `
     {
-      architectureCaseStudyCollection {
+      uiCaseStudyCollection {
         items {
           sys { id }
           title
           slug
-          summary
-          thumbnail { url }
-          body { json }
-          systemDiagram { url }
-          dataFlowDiagram { url }
-          sequenceDiagram { url }
+          summaryLong
+          coverImage { url }
         }
       }
     }
   `;
   const res = await fetchGraphQL(query);
-  return res.data.architectureCaseStudyCollection.items;
+  return res.data.uiCaseStudyCollection.items;
 };

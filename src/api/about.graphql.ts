@@ -3,7 +3,7 @@ import { fetchGraphQL } from "../lib/contentfulGraphql";
 export const getAbout = async () => {
   const query = `
     {
-      aboutCollection(limit: 1) {
+      uiAboutCollection(limit: 1) {
         items {
           title
           summary
@@ -14,5 +14,5 @@ export const getAbout = async () => {
     }
   `;
   const res = await fetchGraphQL(query);
-  return res.data.aboutCollection.items[0];
+  return res.data.uiAboutCollection.items[0];
 };
