@@ -10,8 +10,8 @@ const renderWithRouter = (component: React.ReactElement) => {
 describe('Navbar', () => {
   it('renders the brand name', () => {
     renderWithRouter(<Navbar />)
-    expect(screen.getByText(/Architecture/i)).toBeInTheDocument()
-    expect(screen.getByText(/Systems/i)).toBeInTheDocument()
+    expect(screen.getByText(/design &/i)).toBeInTheDocument()
+    expect(screen.getByText(/develop/i)).toBeInTheDocument()
   })
 
   it('renders Home link', () => {
@@ -32,7 +32,7 @@ describe('Navbar', () => {
     const { container } = renderWithRouter(<Navbar />)
     const nav = container.querySelector('nav')
     expect(nav).toBeInTheDocument()
-    expect(nav).toHaveClass('w-full', 'bg-gray-800')
+    expect(nav).toHaveClass('w-full', 'bg-zinc-800')
   })
 
   it('renders all navigation links', () => {
