@@ -97,24 +97,29 @@ const CaseDetails = () => {
           </section>
         )}
 
-        {caseStudy.sectionsCollection?.items?.map((section: any) => (
-          <section key={section.sys.id} className="mt-10">
-            <h2 className="text-2xl font-semibold text-gray-700 mb-4">{section.title}</h2>
-            {section.imagesCollection?.items && section.imagesCollection.items.length > 0 && (
-              <div className={getGridClass(section.imageLayout || "grid-1")}>
-                {section.imagesCollection.items.map((image: any) => (
-                  <img
-                    key={image.sys.id}
-                    src={image.url}
-                    alt={image.title || section.title}
-                    className="w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
-                    onClick={() => openLightbox(image.url)}
-                  />
-                ))}
-              </div>
-            )}
-          </section>
-        ))}
+        {caseStudy.sectionsCollection?.items?.map((section: any) => {
+          const isMeridanUI = section.title?.toLowerCase().includes("meridian ui");
+          return (
+            <section key={section.sys.id} className="mt-10">
+              <h2 className="text-2xl font-semibold text-gray-700 mb-4">{section.title}</h2>
+              {section.imagesCollection?.items && section.imagesCollection.items.length > 0 && (
+                <div className={getGridClass(section.imageLayout || "grid-1")}>
+                  {section.imagesCollection.items.map((image: any) => (
+                    <img
+                      key={image.sys.id}
+                      src={image.url}
+                      alt={image.title || section.title}
+                      className={`w-full h-auto cursor-pointer hover:opacity-90 transition-opacity ${
+                        isMeridanUI ? "border-2 border-gray-400 rounded-lg" : ""
+                      }`}
+                      onClick={() => openLightbox(image.url)}
+                    />
+                  ))}
+                </div>
+              )}
+            </section>
+          );
+        })}
       </article>
 
       <Lightbox
