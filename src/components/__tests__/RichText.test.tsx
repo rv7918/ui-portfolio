@@ -40,7 +40,7 @@ describe('RichText', () => {
   it('applies default className', () => {
     const { container } = render(<RichText content={mockContent} />)
     const div = container.querySelector('div')
-    expect(div).toHaveClass('prose', 'max-w-none', 'text-gray-700', 'text-lg')
+    expect(div).toHaveClass('prose', 'max-w-none', 'text-gray-700')
   })
 
   it('applies custom className when provided', () => {

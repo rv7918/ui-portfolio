@@ -9,9 +9,9 @@ describe('Footer', () => {
     expect(screen.getByText(new RegExp(currentYear.toString()))).toBeInTheDocument()
   })
 
-  it('renders "Architecture Systems" text', () => {
+  it('renders "Design & Develop" text', () => {
     render(<Footer />)
-    expect(screen.getByText(/Architecture Systems/i)).toBeInTheDocument()
+    expect(screen.getByText(/Design & Develop/i)).toBeInTheDocument()
   })
 
   it('renders "All rights reserved" text', () => {

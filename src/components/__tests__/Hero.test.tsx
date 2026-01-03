@@ -87,7 +87,7 @@ describe('Hero', () => {
     
     const section = container.querySelector('section')
     expect(section).toBeInTheDocument()
-    expect(section).toHaveClass('w-full', 'bg-sky-800')
+    expect(section).toHaveClass('w-full', 'bg-cyan-900')
   })
 })
 
