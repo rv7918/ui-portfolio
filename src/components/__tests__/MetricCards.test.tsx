@@ -52,7 +52,7 @@ describe('MetricCards', () => {
   })
 
   it('does not render description when not provided', () => {
-    const { container } = render(<MetricCards metrics={mockMetrics} />)
+    render(<MetricCards metrics={mockMetrics} />)
     const errorReductionCard = screen.getByText('Error reduction').closest('div')
     const description = errorReductionCard?.querySelector('p.text-blue-600')
     expect(description).not.toBeInTheDocument()
