@@ -10,6 +10,7 @@ export const getCaseStudies = async () => {
           slug
           summaryLong
           coverImage { url }
+          userJourneyMap { url }
         }
       }
     }
