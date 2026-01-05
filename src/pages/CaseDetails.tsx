@@ -7,6 +7,7 @@ import RichText from "../components/RichText";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import NDA from "../components/Nda";
+import MetricCards from "../components/MetricCards";
 
 const CaseDetails = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -35,6 +36,14 @@ const CaseDetails = () => {
       }
     });
   });
+  
+  // Add user journey map to lightbox images
+  if (caseStudy.userJourneyMap?.url) {
+    allImages.push({
+      src: caseStudy.userJourneyMap.url,
+      alt: caseStudy.userJourneyMap.title || `${caseStudy.title} - User Journey Map`,
+    });
+  }
 
   const openLightbox = (imageUrl: string) => {
     const index = allImages.findIndex(img => img.src === imageUrl);
@@ -120,6 +129,49 @@ const CaseDetails = () => {
             </section>
           );
         })}
+
+        {caseStudy?.userJourneyMap && (
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-700 mb-4">User Journey Map</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <img 
+                  src={caseStudy.userJourneyMap.url} 
+                  alt={caseStudy.userJourneyMap.title} 
+                  className="w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
+                  onClick={() => openLightbox(caseStudy.userJourneyMap.url)}
+                />
+              </div>
+              <div>
+                {caseStudy.metricsCollection?.items && caseStudy.metricsCollection.items.length > 0 && (
+                  <MetricCards
+                    title="Validation Results"
+                    metrics={caseStudy.metricsCollection.items.map((metric: any) => ({
+                      title: metric.title,
+                      metric: metric.metric,
+                      description: metric.description,
+                    }))}
+                    columns={2}
+                  />
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {!caseStudy?.userJourneyMap && caseStudy.metricsCollection?.items && caseStudy.metricsCollection.items.length > 0 && (
+          <section>
+            <MetricCards
+              title="Validation Results"
+              metrics={caseStudy.metricsCollection.items.map((metric: any) => ({
+                title: metric.title,
+                metric: metric.metric,
+                description: metric.description,
+              }))}
+              columns={4}
+            />
+          </section>
+        )}
       </article>
 
       <Lightbox

@@ -15,6 +15,15 @@ export const getCaseStudyBySlug = async (slug: string) => {
           process { json }
           outcomeSummary
           coverImage { url }
+          userJourneyMap { url title }
+          metricsCollection {
+            items {
+              sys { id }
+              title
+              metric
+              description
+            }
+          }
           sectionsCollection {
             items {
               sys { id }
