@@ -8,7 +8,7 @@ const Navbar = () => {
           to="/home"
           className="font-display text-2xl font-bold text-[#1a1a1a] tracking-tight hover:opacity-80 transition-opacity"
         >
-          D.D.M
+          <strong>DDM</strong>
         </Link>
         <ul className="flex items-center gap-8 sm:gap-10">
           <li>
