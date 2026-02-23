@@ -2,22 +2,32 @@ import { Link } from "react-router-dom";
 
 const HomeCard = ({ caseStudy }: { caseStudy: any }) => {
   return (
-    <div className="border rounded-lg p-6 hover:shadow-lg transition-shadow bg-slate-200">
+    <article className="group">
       <Link
-        key={caseStudy.sys.id}
         to={`/case/${caseStudy.slug}`}
-        className=""
+        className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1a1a1a] focus-visible:ring-offset-2 rounded-lg"
       >
-        <h3 className="text-xl font-semibold mb-2 text-gray-800">{caseStudy?.title}</h3>
-        <p className="text-gray-600 mb-5 text-gray-800 font-normal">{caseStudy?.summaryLong}</p>
-        <img
-          src={caseStudy?.coverImage?.url}
-          alt={caseStudy?.title}
-          className="w-full h-auto"
-        />
-        <button className="!bg-slate-700 text-white px-4 py-2 rounded-lg mt-5">View Case Study</button>
+        <div className="overflow-hidden rounded-lg bg-[#e8e6e3] aspect-[4/3] mb-6">
+          {caseStudy?.coverImage?.url ? (
+            <img
+              src={caseStudy.coverImage.url}
+              alt={caseStudy?.title ?? ""}
+              className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.02]"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-[#5c5c5c] font-sans text-sm">
+              No image
+            </div>
+          )}
+        </div>
+        <h3 className="font-display text-xl font-bold text-[#1a1a1a] tracking-tight">
+          {caseStudy?.title}
+        </h3>
+        <p className="mt-2 font-sans text-sm text-[#1a1a1a] leading-relaxed line-clamp-2">
+          {caseStudy?.summaryLong ?? caseStudy?.summary}
+        </p>
       </Link>
-    </div>
+    </article>
   );
 };
 

@@ -2,22 +2,29 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <nav className="w-full bg-zinc-800 sticky top-0 z-50">
-      <div className="container mx-auto flex justify-between items-center p-4">
-        <Link to="/home" className="text-lg text-white">
-          design & <strong>develop</strong>
+    <nav className="w-full bg-[#faf9f7] sticky top-0 z-50 border-b border-[#e8e6e3]">
+      <div className="container mx-auto px-4 flex justify-between items-center h-16">
+        <Link
+          to="/home"
+          className="font-display text-2xl font-bold text-[#1a1a1a] tracking-tight hover:opacity-80 transition-opacity"
+        >
+          D.D.M
         </Link>
-        <ul className="flex items-center">
-          <li className="mr-4">
-            <Link to="/home">Home</Link>
+        <ul className="flex items-center gap-8 sm:gap-10">
+          <li>
+            <Link to="/home" className="font-sans text-sm font-normal text-[#1a1a1a] hover:opacity-70 transition-opacity">
+              Home
+            </Link>
           </li>
-          <li className="mr-4">
-            <Link to="/about">About</Link>
+          <li>
+            <Link to="/about" className="font-sans text-sm font-normal text-[#1a1a1a] hover:opacity-70 transition-opacity">
+              About
+            </Link>
           </li>
         </ul>
       </div>
-    </nav>    
+    </nav>
   );
 };
 
-export default Navbar
+export default Navbar;

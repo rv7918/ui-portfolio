@@ -44,8 +44,7 @@ describe('Hero', () => {
     )
 
     renderWithQueryClient(<Hero />)
-    // Wait for error state
-    expect(await screen.findByText(/Error/i)).toBeInTheDocument()
+    expect(await screen.findByText(/Something went wrong/i)).toBeInTheDocument()
   })
 
   it('renders headline and subheadline when data is loaded', async () => {
@@ -63,8 +62,8 @@ describe('Hero', () => {
     vi.mocked(homepageApi.getHomepageData).mockResolvedValue(mockData)
 
     renderWithQueryClient(<Hero />)
-    
-    expect(await screen.findByText('Test Headline')).toBeInTheDocument()
+
+    expect(await screen.findByText(/Hi, I'm Test Headline\./)).toBeInTheDocument()
     expect(await screen.findByText('Test Subheadline')).toBeInTheDocument()
   })
 
@@ -83,11 +82,11 @@ describe('Hero', () => {
     vi.mocked(homepageApi.getHomepageData).mockResolvedValue(mockData)
 
     const { container } = renderWithQueryClient(<Hero />)
-    await screen.findByText('Test Headline')
+    await screen.findByText(/Hi, I'm Test Headline\./)
     
     const section = container.querySelector('section')
     expect(section).toBeInTheDocument()
-    expect(section).toHaveClass('w-full', 'bg-cyan-900')
+    expect(section).toHaveClass('w-full')
   })
 })
 

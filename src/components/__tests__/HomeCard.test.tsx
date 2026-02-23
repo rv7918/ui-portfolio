@@ -47,14 +47,15 @@ describe('HomeCard', () => {
       coverImage: null,
     }
     renderWithRouter(<HomeCard caseStudy={caseStudyWithoutCoverImage} />)
-    const image = screen.getByAltText('Test Case Study')
-    expect(image).toBeInTheDocument()
+    expect(screen.getByText('No image')).toBeInTheDocument()
   })
 
   it('has correct card structure', () => {
     const { container } = renderWithRouter(<HomeCard caseStudy={mockCaseStudy} />)
-    const card = container.querySelector('div')
-    expect(card).toHaveClass('border', 'rounded-lg', 'p-6')
+    const article = container.querySelector('article')
+    expect(article).toBeInTheDocument()
+    const link = screen.getByRole('link')
+    expect(link).toHaveAttribute('href', '/case/test-case-study')
   })
 })
 

@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCaseStudies } from "../api/caseStudies.graphql";
 import HomeCard from "../components/HomeCard";
 
+
 const Home = () => {
   const { data: cases = [], isLoading } = useQuery({
     queryKey: ["case-studies"],
@@ -12,18 +13,21 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <div className="container mx-auto px-4 py-12">
-        <h2 className="text-3xl font-bold mb-8 text-gray-700">Case Studies</h2>
-        {isLoading ? (
-          <p>Loading case studies...</p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {cases.map((caseStudy: any) => (
-                <HomeCard key={caseStudy.sys.id} caseStudy={caseStudy} />
-            ))}
-          </div>
-        )}
-      </div>
+      <section className="bg-[#faf9f7] py-16 sm:py-20 lg:py-24 -mt-25">
+        <div className="container mx-auto px-4">
+          {isLoading ? (
+            <p className="text-[#5c5c5c] text-center">Loading case studies…</p>
+          ) : (
+            <ul className="grid grid-cols-1 md:grid-cols-3 gap-20 sm:gap-25 list-none p-0 m-0">
+              {cases.map((caseStudy: any) => (
+                <li key={caseStudy.sys.id}>
+                  <HomeCard caseStudy={caseStudy} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </section>
     </>
   );
 };
