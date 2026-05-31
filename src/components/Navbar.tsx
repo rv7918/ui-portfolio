@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import logo from "../assets/d_logo.png";
 
 const Navbar = () => {
   return (
@@ -8,7 +9,7 @@ const Navbar = () => {
           to="/home"
           className="font-display text-2xl font-bold text-[#1a1a1a] tracking-tight hover:opacity-80 transition-opacity"
         >
-          <strong>DDM</strong>
+          <img src={logo} alt="Logo" className="h-10" />
         </Link>
         <ul className="flex items-center gap-8 sm:gap-10">
           <li>
